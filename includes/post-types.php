@@ -6,9 +6,9 @@
 
 function nitp_setup_post_type() {
     // check to see if post type exists
-    if ( ! post_type_exists( 'portfolio projects' ) ) {
+    if ( ! post_type_exists( 'nitp_projects' ) ) {
         // register the "portfolio projects" custom post type
-        register_post_type( 'portfolio projects', 
+        register_post_type( 'nitp_projects', 
         	array(
                 'labels' => array(
                     'name' => __( 'Portfolio Projects' ),
@@ -33,5 +33,13 @@ function nitp_setup_post_type() {
     }
 }
 add_action( 'init', 'nitp_setup_post_type' );
+
+function itp_install() {
+    // trigger our function that registers the custom post type
+    nitp_setup_post_type();
+ 
+    // clear the permalinks after the post type has been registered
+    flush_rewrite_rules();
+}
 
 ?>
