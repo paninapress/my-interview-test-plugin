@@ -9,5 +9,6 @@
 /*********************************
 * includes
 *********************************/
+include('includes/post-types.php');			// manage custom post types
 
 ?>
