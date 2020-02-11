@@ -26,7 +26,7 @@ function nitp_setup_post_type() {
                 'description' => 'A place to list portfolio projects',
                 'public' => true,
                 'has_archive' => true,
-                'rewrite' => array('slug' => 'portfolio-projects'),
+                'rewrite' => array('slug' => 'my-portfolio-projects'),
                 'menu_icon' => 'dashicons-portfolio',
             )
         );
@@ -34,12 +34,21 @@ function nitp_setup_post_type() {
 }
 add_action( 'init', 'nitp_setup_post_type' );
 
-function itp_install() {
+function nitp_install() {
     // trigger our function that registers the custom post type
     nitp_setup_post_type();
  
     // clear the permalinks after the post type has been registered
     flush_rewrite_rules();
 }
+register_activation_hook( __FILE__, 'nitp_install' );
+
+function nitp_deactivation() {
+    // unregister the post type, so the rules are no longer in memory
+    unregister_post_type( 'nitp_projects' );
+    // clear the permalinks to remove our post type's rules from the database
+    flush_rewrite_rules();
+}
+register_deactivation_hook( __FILE__, 'nitp_deactivation' );
 
 ?>
