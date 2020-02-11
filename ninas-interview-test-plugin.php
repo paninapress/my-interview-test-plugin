@@ -7,6 +7,12 @@
  */
 
 /*********************************
+* global variables
+*********************************/
+
+global $wpdb; // wordpress database
+
+/*********************************
 * includes
 *********************************/
 include('includes/post-types.php');			// manage custom post types
